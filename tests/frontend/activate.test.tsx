@@ -296,3 +296,19 @@ describe("formatting", () => {
     expect(shortPrint("short")).toBe("short");
   });
 });
+
+describe("homepage widget", () => {
+  it("adds a homepage widget and declares the extension point", async () => {
+    rendered = await renderWithApp(plugin, { manifest, locales });
+    expect(rendered.registered.extensions("homepage.widgets")).toEqual([
+      "security_center_widget",
+    ]);
+    expect(manifest.contributes.uses).toContain("homepage.widgets");
+    const fields = (
+      manifest.contributes.settings as {
+        host: { fields: Array<{ key: string }> };
+      }
+    ).host.fields.map((f) => f.key);
+    expect(fields).toContain("showPanel");
+  });
+});
