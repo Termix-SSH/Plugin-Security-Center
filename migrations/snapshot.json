@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "tables": {
+    "hosts": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "hostId": {
+          "type": "refHost",
+          "notNull": true
+        },
+        "userId": {
+          "type": "refUser",
+          "length": 255,
+          "notNull": true
+        },
+        "alerts": {
+          "type": "boolean",
+          "notNull": true,
+          "defaultValue": true
+        },
+        "intervalMin": {
+          "type": "integer",
+          "notNull": true,
+          "defaultValue": 60
+        },
+        "vulnIntervalH": {
+          "type": "integer",
+          "notNull": true,
+          "defaultValue": 24
+        },
+        "minRsaBits": {
+          "type": "integer",
+          "notNull": true,
+          "defaultValue": 3072
+        },
+        "keyMaxAgeDays": {
+          "type": "integer",
+          "notNull": true,
+          "defaultValue": 0
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "notNull": true,
+          "defaultNow": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "idx_p_security_center_hosts_host",
+          "columns": [
+            "hostId"
+          ]
+        }
+      ]
+    },
+    "events": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "hostId": {
+          "type": "integer",
+          "notNull": true
+        },
+        "at": {
+          "type": "bigint",
+          "notNull": true
+        },
+        "type": {
+          "type": "varchar",
+          "length": 40,
+          "notNull": true
+        },
+        "text": {
+          "type": "varchar",
+          "length": 300,
+          "notNull": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "idx_p_security_center_events_host_at",
+          "columns": [
+            "hostId",
+            "at"
+          ]
+        }
+      ]
+    },
+    "ignores": {
+      "columns": {
+        "id": {
+          "type": "id",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "hostId": {
+          "type": "integer",
+          "notNull": true
+        },
+        "advisory": {
+          "type": "varchar",
+          "length": 80,
+          "notNull": true
+        },
+        "note": {
+          "type": "varchar",
+          "length": 300,
+          "notNull": true,
+          "defaultValue": ""
+        },
+        "at": {
+          "type": "bigint",
+          "notNull": true
+        }
+      },
+      "indexes": [
+        {
+          "name": "idx_p_security_center_ignores_host",
+          "columns": [
+            "hostId"
+          ]
+        }
+      ]
+    }
+  }
+}
