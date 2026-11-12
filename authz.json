@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Termix-SSH/Termix/main/scripts/authz/authz.schema.json",
+  "seed": [],
+  "routes": {
+    "GET /plugin-api/security-center/:hostId": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "PUT /plugin-api/security-center/:hostId/config": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "GET /plugin-api/security-center/:hostId/events": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "POST /plugin-api/security-center/:hostId/ignore": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "DELETE /plugin-api/security-center/:hostId/ignore/:advisory": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true,
+      "allowed": "any",
+      "note": "Names a advisory on the host, which the test host does not have; host access is still checked"
+    },
+    "POST /plugin-api/security-center/:hostId/refresh": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "POST /plugin-api/security-center/:hostId/revoke": {
+      "access": "user",
+      "permission": ["security-center.use", "security-center.rotate"],
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true
+    },
+    "POST /plugin-api/security-center/:hostId/rotate-host-keys": {
+      "access": "user",
+      "permission": ["security-center.use", "security-center.rotate"],
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true
+    },
+    "POST /plugin-api/security-center/:hostId/rotate-login-key": {
+      "access": "user",
+      "permission": ["security-center.use", "security-center.rotate"],
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      },
+      "destructive": true
+    },
+    "POST /plugin-api/security-center/:hostId/scan": {
+      "access": "user",
+      "permission": ["security-center.use", "security-center.scan-vulns"],
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "GET /plugin-api/security-center/:hostId/vulns": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect"
+      }
+    },
+    "GET /plugin-api/security-center/summary": {
+      "access": "user",
+      "permission": "security-center.use",
+      "resource": {
+        "kind": "host",
+        "min": "connect",
+        "key": "hostId"
+      },
+      "filtered": true,
+      "note": "Lists only what the caller may see"
+    }
+  }
+}
