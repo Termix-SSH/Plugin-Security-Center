@@ -92,8 +92,13 @@ export class Engine {
 
   start(): void {
     this.stops.push(
-      this.ctx.schedule.every(TICK_MS, () => this.tick(), { jitterMs: 5_000 }),
-      this.ctx.schedule.every(FLUSH_MS, () => this.osv.flush()),
+      this.ctx.schedule.every(TICK_MS, () => this.tick(), {
+        id: "scan",
+        jitterMs: 5_000,
+      }),
+      this.ctx.schedule.every(FLUSH_MS, () => this.osv.flush(), {
+        id: "osv-flush",
+      }),
     );
   }
 
